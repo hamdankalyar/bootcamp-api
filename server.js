@@ -1,20 +1,24 @@
-const express = require('express')
-const dotenv = require('dotenv')
-
+const express = require('express');
+const dotenv = require('dotenv');
+const connectDB = require('./config/db');
 //Route files
-const bootcamps = require('./routes/bootcamps')
+const bootcamps = require('./routes/bootcamps');
 
 // load env vars
-dotenv.config({ path: './config/config.env' })
+dotenv.config({ path: './config/config.env' });
 
-const app = express()
+// connect db
+connectDB();
+const app = express();
 
 // Mount routers
-app.use('/api/v1/bootcamps', bootcamps)
+app.use('/api/v1/bootcamps', bootcamps);
 
-const PORT = process.env.PORT || 5000
+const PORT = process.env.PORT || 5000;
 
 app.listen(
   PORT,
-  console.log(`Server in ${process.env.NODE_ENV} running on the port ${PORT}`),
-)
+  console.log(
+    `Server in ${process.env.NODE_ENV} running on the port ${PORT}`
+  )
+);
